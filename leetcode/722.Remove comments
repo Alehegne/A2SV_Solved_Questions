@@ -1,0 +1,31 @@
+class Solution:
+    def removeComments(self, source: List[str]) -> List[str]:
+        output=[]
+        isblock=False
+        bline = -1
+        for ind,line in enumerate(source):
+            sub=""
+            i=0
+            while i<len(line):
+                if not isblock and line[i]=="/" and i+1<len(line) and line[i+1]=="*":
+                    isblock=True
+                    bline = ind
+                    i+=1
+                elif isblock and  line[i]=="*" and i+1<len(line) and line[i+1]=="/":
+                    isblock=False
+                    i+=2
+                    if output and bline!=ind and (source[bline][0]!="/" and source[bline][1]!="*"):
+                        sub=output.pop()
+                    # to handle /*/i/*///*c
+                    if i>len(line):
+                        output.append(sub)
+                    else:
+                        continue
+                elif not isblock and line[i]=="/" and i+1<len(line) and line[i+1]=="/":
+                    break
+                if not isblock and i<len(line):
+                    sub+=line[i]
+                i+=1
+            if sub!="":
+                output.append(sub)
+        return output
