@@ -1,0 +1,10 @@
+class Solution:
+    def twoSum(self,nums : List[int], target: int) -> List[int]:#List[int] is the type hinting
+        comp = {}  # Dictionary to store the complement of each number
+        
+        for i in range(len(nums)):
+            if target - nums[i] in comp:
+                return [comp[target - nums[i]], i]  # Return the first valid pair immediately
+            comp[nums[i]] = i  # Store index of the current number
+        
+        return []  # If no valid pair is found
