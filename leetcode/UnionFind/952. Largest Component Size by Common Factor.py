@@ -69,11 +69,11 @@ class Solution:
                     dsu.union(i,f[e])
                 else:
                     f[e] = i
-        groups = dsu.printGroups()
-        mx = float("-inf")
-        for gr in groups:
-            mx = max(mx,len(gr))
-        return mx
+        # groups = dsu.printGroups()
+        # mx = float("-inf")
+        # for gr in groups:
+        #     mx = max(mx,len(gr))
+        return max(dsu.size)
         
 
 
